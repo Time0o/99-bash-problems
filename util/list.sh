@@ -10,9 +10,9 @@ trim() {
 }
 
 parse_list() {
-    rsp="[[:space:]]*"
-    relem="[^,[:space:]]+"
-    rlist="^\[$rsp(($relem)?($rsp,$rsp$relem)*)$rsp\]$"
+    local rsp="[[:space:]]*"
+    local relem="[^,[:space:]]+"
+    local rlist="^\[$rsp(($relem)?($rsp,$rsp$relem)*)$rsp\]$"
 
     if [[ "$1" =~ $rlist ]]; then
         IFS=',' read -ra list <<< "${BASH_REMATCH[1]}"
@@ -38,7 +38,7 @@ format_list() {
         return 0
     fi
 
-    res="[${arr[0]}"
+    local res="[${arr[0]}"
 
     for ((i = 1; i < ${#arr[@]}; ++i)); do
         res="$res, ${arr[i]}"
